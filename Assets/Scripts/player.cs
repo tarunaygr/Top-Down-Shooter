@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
@@ -14,11 +15,14 @@ public class player : MonoBehaviour
     private Transform firepoint;
     [SerializeField]
     private float Bullet_speed;
-
+    float TimetoFire,rateofFire=0.25f;
+    [SerializeField]
+    private int health;
     // Start is called before the first frame update
     void Start()
     {
         _charactercontroller = GetComponent<CharacterController>();
+        TimetoFire = -1;
 
     }
 
@@ -27,8 +31,9 @@ public class player : MonoBehaviour
     {
         movement();
         Look();
-        if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Mouse0))
+        if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Mouse0)&&Time.time>=TimetoFire)
         {
+            TimetoFire = Time.time + rateofFire;
             fire();
         }
        
@@ -54,5 +59,14 @@ public class player : MonoBehaviour
         GameObject fired_bullet = Instantiate(bullet_prefab, firepoint.position, Quaternion.identity);
         Rigidbody rb = fired_bullet.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward.normalized * Bullet_speed);
+    }
+    public void TakeDamage()
+    {
+        health--;
+        if(health<=0)
+        {
+            Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }

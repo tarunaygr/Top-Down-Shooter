@@ -18,11 +18,6 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = Input.mousePosition;
-       // pos.y = target.position.y;
-        pos.z = target.position.z;
-        pos1 = Camera.main.ScreenToWorldPoint(pos);
-        pos1.y = target.position.y;
-        transform.position = pos1;
+        transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 1.5f));
     }
 }

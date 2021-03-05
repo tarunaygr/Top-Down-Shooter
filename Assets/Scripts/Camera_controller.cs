@@ -13,8 +13,12 @@ public class Camera_controller : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        Vector3 DesiredPosition = targetTransform.position + offset;
-        Vector3 SmoothedPosition = Vector3.Lerp(transform.position, DesiredPosition, SmoothSpeed * Time.deltaTime);
-        transform.position = SmoothedPosition;
+        if(targetTransform!=null)
+        {
+            Vector3 DesiredPosition = targetTransform.position + offset;
+            Vector3 SmoothedPosition = Vector3.Lerp(transform.position, DesiredPosition, SmoothSpeed * Time.deltaTime);
+            transform.position = SmoothedPosition;
+        }
+       
     }
 }

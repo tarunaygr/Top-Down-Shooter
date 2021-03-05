@@ -25,7 +25,7 @@ public class Bullet : MonoBehaviour
         }
         if(collision.transform.CompareTag("Player")&&firedByEnemy==true)
         {
-            Destroy(collision.gameObject);
+            collision.transform.GetComponent<player>().TakeDamage();
             Destroy(gameObject);
         }
     }

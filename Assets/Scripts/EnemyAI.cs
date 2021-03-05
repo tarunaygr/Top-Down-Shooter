@@ -10,25 +10,33 @@ public class EnemyAI : MonoBehaviour
     Transform target;
     [SerializeField]
     GameObject bullet_prefab;
+    Transform firepoint;
+    float TimetoFire, RateofFire=1f;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
-
+        TimetoFire = 3f;
+        firepoint = transform.GetChild(1).transform;
 
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        agent.SetDestination(target.position);
-        float distance = Vector3.Distance(target.position, transform.position);
-        if (distance <= agent.stoppingDistance)
+        if(target!=null)
         {
-            FaceTarget();
-            //Shoot();
+            agent.SetDestination(target.position);
+            float distance = Vector3.Distance(target.position, transform.position);
+            if (distance <= agent.stoppingDistance)
+            {
+                FaceTarget();
+                if (TimetoFire <= Time.time) 
+                Shoot();
 
+            }
         }
+
     }
     void FaceTarget()
     {
@@ -38,9 +46,10 @@ public class EnemyAI : MonoBehaviour
     }
     void Shoot()
     {
-        GameObject FiredBullet=Instantiate(bullet_prefab, transform.position, Quaternion.identity);
+        TimetoFire = Time.time + RateofFire;
+        GameObject FiredBullet=Instantiate(bullet_prefab, firepoint.position, Quaternion.identity);
         FiredBullet.GetComponent<Bullet>().IsFiredByEnemy();
-        FiredBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10f);
+        FiredBullet.GetComponent<Rigidbody>().AddForce(transform.forward * 300f);
 
     }
 }
