@@ -8,12 +8,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     GameObject Enemy;
     Vector3 screenedges;
+    GameManager _gamemanager;
+
     [SerializeField]
     private int EnemyLimit;
 
     void Start()
     {
         StartCoroutine(SpawnEnemies());
+        _gamemanager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         screenedges = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
     }
 
@@ -29,7 +32,7 @@ public class SpawnManager : MonoBehaviour
         {
             
             yield return new WaitForSeconds(3);
-            if(GameObject.FindGameObjectsWithTag("Enemy").Length<EnemyLimit)
+            if(GameObject.FindGameObjectsWithTag("Enemy").Length<EnemyLimit&&_gamemanager.ispaused()==false)
             {
                 int seed = Random.Range(0, 4);
                 Debug.Log(seed);

@@ -18,24 +18,30 @@ public class player : MonoBehaviour
     float TimetoFire,rateofFire=0.25f;
     [SerializeField]
     private int health;
+    GameManager _gamemanager;
     // Start is called before the first frame update
     void Start()
     {
+        _gamemanager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         _charactercontroller = GetComponent<CharacterController>();
         TimetoFire = -1;
-
+        _gamemanager.PlayerHealth(health);
     }
 
     // Update is called once per frame
     void Update()
     {
-        movement();
-        Look();
-        if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Mouse0)&&Time.time>=TimetoFire)
+        if(_gamemanager.ispaused()==false)
         {
-            TimetoFire = Time.time + rateofFire;
-            fire();
+            movement();
+            Look();
+            if(Input.GetKeyDown(KeyCode.Space)|| Input.GetKeyDown(KeyCode.Mouse0)&&Time.time>=TimetoFire)
+            {
+                TimetoFire = Time.time + rateofFire;
+                fire();
+            }
         }
+        
        
     }
     void movement()
@@ -63,10 +69,10 @@ public class player : MonoBehaviour
     public void TakeDamage()
     {
         health--;
-        if(health<=0)
+        _gamemanager.PlayerHealth(health);
+        if (health <= 0)
         {
             Destroy(gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }

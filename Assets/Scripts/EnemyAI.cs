@@ -12,8 +12,10 @@ public class EnemyAI : MonoBehaviour
     GameObject bullet_prefab;
     Transform firepoint;
     float TimetoFire, RateofFire=1f;
+    GameManager _gamemanager;
     void Start()
     {
+        _gamemanager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         agent = GetComponent<NavMeshAgent>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
         TimetoFire = 3f;
@@ -31,7 +33,7 @@ public class EnemyAI : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 FaceTarget();
-                if (TimetoFire <= Time.time) 
+                if (TimetoFire <= Time.time&&_gamemanager.ispaused()==false) 
                 Shoot();
 
             }
