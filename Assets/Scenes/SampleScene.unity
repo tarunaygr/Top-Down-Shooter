@@ -946,6 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586126228fd6aee478b9585c98146992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uimanager: {fileID: 832622706}
 --- !u!4 &1371041593
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,6 +1519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4425543185437925047, guid: 6edaead1f13b5f24584ceecbcd53d240, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edaead1f13b5f24584ceecbcd53d240, type: 3}
 --- !u!1001 &8558677708679439901
@@ -1527,22 +1532,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2141183642, guid: 8eba08ec1e6efd347ae8e940051f3d7c, type: 3}
-      propertyPath: m_Size.x
-      value: 3.0483375
-      objectReference: {fileID: 0}
-    - target: {fileID: 2141183642, guid: 8eba08ec1e6efd347ae8e940051f3d7c, type: 3}
-      propertyPath: m_Size.z
-      value: 2.2740233
-      objectReference: {fileID: 0}
-    - target: {fileID: 2141183642, guid: 8eba08ec1e6efd347ae8e940051f3d7c, type: 3}
-      propertyPath: m_Center.x
-      value: -0.06388497
-      objectReference: {fileID: 0}
-    - target: {fileID: 2141183642, guid: 8eba08ec1e6efd347ae8e940051f3d7c, type: 3}
-      propertyPath: m_Center.z
-      value: 0.03692639
-      objectReference: {fileID: 0}
     - target: {fileID: 4761224714193792917, guid: 8eba08ec1e6efd347ae8e940051f3d7c, type: 3}
       propertyPath: m_Name
       value: Player
