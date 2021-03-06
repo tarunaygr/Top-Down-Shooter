@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     int Score;
     bool pausestate;
+    [SerializeField]
     UIManager _uimanager;
     void Start()
     {
-        _uimanager = GameObject.FindGameObjectWithTag("Canvas").gameObject.GetComponent<UIManager>();
+        //_uimanager = GameObject.FindGameObjectWithTag("Canvas").gameObject.GetComponent<UIManager>();
         Score = 0;
         _uimanager.UpdateScore(Score);
         Cursor.lockState = CursorLockMode.Confined;
@@ -49,7 +50,9 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerHealth(int healthLeft)
     {
-        _uimanager.UpdateHealth(healthLeft);
+        if (_uimanager != null)
+            _uimanager.UpdateHealth(healthLeft);
+        else Debug.Log("UIerror");
         if(healthLeft<=0)
         {
             Restart();
