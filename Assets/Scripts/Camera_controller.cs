@@ -11,6 +11,9 @@ public class Camera_controller : MonoBehaviour
     [SerializeField]
     private Vector3 offset;
     // Update is called once per frame
+    void Start() {
+        offset = transform.position - targetTransform.position;
+    }
     void LateUpdate()
     {
         if(targetTransform!=null)

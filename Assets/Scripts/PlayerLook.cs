@@ -36,9 +36,16 @@ public class PlayerLook : MonoBehaviour
     }
     void Look()
     {
-        mouse_ip = Input.mousePosition;
-        mouse_world = Camera.main.ScreenToWorldPoint(mouse_ip);
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        if (Physics.Raycast(ray, out hit)) {
+            mouse_world = hit.point;
+        }
+
         mouse_world.y = transform.position.y;
+        Debug.Log(mouse_world);
+        Debug.Log(mouse_ip);
         transform.LookAt(mouse_world, Vector3.up);
     }
     void fire()
