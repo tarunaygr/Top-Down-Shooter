@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     // Start is called before the first frame update
+    //[SerializeField]
+  //  Text Score_text,health_text;
     [SerializeField]
-    Text Score_text,health_text;
+    GameObject PausePanel,GameOverPanel;
     [SerializeField]
-    GameObject PausePanel;
+    SimpleHealthBar healthBar;
+    [SerializeField]
+    TMP_Text Score_text;
     void Start()
     {
         //  Score_text = transform.GetComponentsInChildren<Text>()[0];
@@ -22,10 +27,14 @@ public class UIManager : MonoBehaviour
     }
     public void UpdateHealth(int health)
     {
-        health_text.text = "Health: " + health;
+        healthBar.UpdateBar(health,3);
     }
     public void PausePanelControl(bool pausestate)
     {
         PausePanel.SetActive(pausestate);
+    }
+    public void Gameisover()
+    {
+        GameOverPanel.SetActive(true);
     }
 }

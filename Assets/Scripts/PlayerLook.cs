@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerLook : MonoBehaviour
     [SerializeField]
     private Transform firepoint1,firepoint2;
     float TimetoFire, rateofFire = 0.25f;
+    [SerializeField]
+    float mousex;
     GameManager _gamemanager;
     void Start()
     {
@@ -27,6 +30,7 @@ public class PlayerLook : MonoBehaviour
         if (_gamemanager.ispaused() == false)
         {
             Look();
+            //newLook();
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= TimetoFire)
             {
                 TimetoFire = Time.time + rateofFire;
@@ -44,9 +48,15 @@ public class PlayerLook : MonoBehaviour
         }
 
         mouse_world.y = transform.position.y;
-        Debug.Log(mouse_world);
-        Debug.Log(mouse_ip);
+        //Debug.Log(mouse_world);
+        //Debug.Log(mouse_ip);
         transform.LookAt(mouse_world, Vector3.up);
+    }
+
+    void newLook()
+    {
+        mousex += Input.GetAxis("Mouse X");
+        transform.localRotation=Quaternion.Euler(Quaternion.identity.y, mousex, Quaternion.identity.z);
     }
     void fire()
     {

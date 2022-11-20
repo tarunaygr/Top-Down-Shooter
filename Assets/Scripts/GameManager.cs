@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         Score = 0;
         _uimanager.UpdateScore(Score);
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        //Cursor.visible = false;
     }
     private void Awake()
     {
@@ -37,9 +37,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1f;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = false;
+                resume();
             }
         }
     }
@@ -55,7 +53,8 @@ public class GameManager : MonoBehaviour
         else Debug.Log("UIerror");
         if(healthLeft<=0)
         {
-            Restart();
+            pausestate = true;
+            _uimanager.Gameisover();
         }
     }
     public bool ispaused()
@@ -70,5 +69,12 @@ public class GameManager : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+    public void resume()
+    {
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Confined;
+        pausestate = false;
+        _uimanager.PausePanelControl(pausestate);
     }
 }
